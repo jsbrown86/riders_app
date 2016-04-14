@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<body>
+
+<!-- <table border = 1>
+<thead>
+	<td>Name</td>
+	<td>Phone Number</td>
+	<td>UO_ID</td>
+	<td>Where To</td>
+	<td>Where From</td>
+	<td>Riders</td>
+</thead>
+
+{% for row in rows %}
+	<tr>
+		
+		<td>{{row["name"]}}</td>
+		<td>{{row["phone"]}}</td>
+		<td>{{row["uo_id"]}}</td>
+		<td>{{row["to_addr"]}}</td>
+		<td>{{row["from_addr"]}}</td>
+		<td>{{row["riders"]}}</td>
+	</tr>
+{% endfor %} -->
+
+<h3>ScrollbaR?</h3>
+
+<select name = "requests" size=10 method = 'DISPLAY'>
+{% for row in rows %}
+<option>{{row["time"]}} {{row["name"]}} {{row["phone"]}} {{row["uo_id"]}} {{row["to_addr"]}} {{row["from_addr"]}} {{row["riders"]}}
+{% endfor %}
+
+
+</table>
+
+<a href = "/">Go back to portal</a>
+</body>
+</html>

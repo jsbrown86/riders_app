@@ -1,0 +1,31 @@
+<html>
+<body>
+<center><form action = {{ url_for('rider') }} method = "POST">
+<h3>SafeRide Wonder App - Enter your Information Below</h3>
+
+Name<br>
+<input type = "text" name = "name" /></br>
+
+Phone Number<br>
+<input type = "text" name = "phone" /><br>
+
+Time To be Picked Up<br>
+<input type = "text" name = "time" /><br>
+
+UO ID<br>
+<input type = "text" name = "uo_id" /><br>
+
+Where You Would Like To Go<br>
+<input type = "text" name = "to_addr" ><br>
+
+Where You Are<br>
+<input type = "text" name = "from_addr" ><br>
+
+Number of Riders<br>
+<input type = "text" name = "riders" /><br>
+
+<input type = "submit" value = "submit" /><br>
+</form>
+</center>
+</body>
+</html>
