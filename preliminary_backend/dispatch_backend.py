@@ -22,14 +22,11 @@ def rider():
             fddr = request.form['from_addr']
             rdrs = request.form['riders']
 
-            ##name TEXT, addr TEXT, city TEXT, pin TEXT
-            ##name TEXT, phone TEXT, uo_id TEXT, to_addr TEXT, from_addr TEXT, riders TEXT
-
             with sql.connect("database.db") as con:
                 cur = con.cursor()
 
-                cur.execute("INSERT INTO requests (name,time,phone,uo_id,to_addr,from_addr,riders) VALUES (?,?,?,?,?,?,?)",(nm,tm,phn,uoid,tddr,fddr,rdrs) )
-
+                cur.execute("INSERT INTO requests (name,time,phone,uo_id,to_addr,from_addr,riders,active) VALUES (?,?,?,?,?,?,?,'Yes')",(nm,tm,phn,uoid,tddr,fddr,rdrs) )
+            
                 con.commit()
                 msg = "Record successfully added"
         except:
@@ -47,7 +44,7 @@ def dispatch():
     con.row_factory = sql.Row
 
     cur = con.cursor()
-    cur.execute("select * from requests")
+    cur.execute("select * from requests order by time")
 
     rows = cur.fetchall()
     return render_template("dispatch_display.html",rows = rows)
