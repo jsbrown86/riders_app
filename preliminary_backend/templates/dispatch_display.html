@@ -24,16 +24,44 @@
 	</tr>
 {% endfor %} -->
 
-<h3>ScrollbaR?</h3>
+<center><h1>SafeRide Dispatch Station</h1></center>
 
-<select name = "requests" size=10 method = 'DISPLAY'>
+<p>
+
+<center><select name = "requests" size=10 width=90%>
 {% for row in rows %}
-<option>{{row["time"]}} {{row["name"]}} {{row["phone"]}} {{row["uo_id"]}} {{row["to_addr"]}} {{row["from_addr"]}} {{row["riders"]}}
+<option>Time: {{row["time"]}}, Name: {{row["name"]}}, Ph: {{row["phone"]}}, UO ID: {{row["uo_id"]}}, To Addr:  {{row["to_addr"]}}, From Addr: {{row["from_addr"]}}, Riders: {{row["riders"]}}, Active Request: {{row["active"]}}
 {% endfor %}
-
+</select></center>
 
 </table>
 
-<a href = "/">Go back to portal</a>
+<hr width = 100%>
+
+<table width = 80% align=center border = 1>
+<tr>
+<td>Name: </td>
+<td>Phone: </td>
+<td>Scheduled Pickup: </td>
+</tr><tr>
+<td>UO ID: </td>
+<td>To Addr: </td>
+<td>From Addr: </td>
+</tr><tr>
+<td>Riders: </td>
+<td>Active Request: </td>
+<td>Number of Offenses: </td>
+</tr><tr>
+<td><form><input type = "submit" value = "Approve & Generate Code" onClick="history.go()"></form></td>
+<td><form><input type = "submit" value = "Remove & Deny" onClick="history.go()"></form></td>
+</tr><tr>
+<td>Code: </a>
+</table>
+
+
+
+<p>
+<p>
+<center><a href = "/">Go back to portal</a></center>
 </body>
 </html>
