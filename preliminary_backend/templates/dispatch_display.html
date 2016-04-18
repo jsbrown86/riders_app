@@ -2,66 +2,46 @@
 <html>
 <body>
 
-<!-- <table border = 1>
-<thead>
-	<td>Name</td>
-	<td>Phone Number</td>
-	<td>UO_ID</td>
-	<td>Where To</td>
-	<td>Where From</td>
-	<td>Riders</td>
-</thead>
-
-{% for row in rows %}
-	<tr>
-		
-		<td>{{row["name"]}}</td>
-		<td>{{row["phone"]}}</td>
-		<td>{{row["uo_id"]}}</td>
-		<td>{{row["to_addr"]}}</td>
-		<td>{{row["from_addr"]}}</td>
-		<td>{{row["riders"]}}</td>
-	</tr>
-{% endfor %} -->
-
 <center><h1>SafeRide Dispatch Station</h1></center>
 
 <p>
 
-<center><select name = "requests" size=10 width=90%>
+<center>
+
 {% for row in rows %}
-<option>Time: {{row["time"]}}, Name: {{row["name"]}}, Ph: {{row["phone"]}}, UO ID: {{row["uo_id"]}}, To Addr:  {{row["to_addr"]}}, From Addr: {{row["from_addr"]}}, Riders: {{row["riders"]}}, Active Request: {{row["active"]}}
-{% endfor %}
-</select></center>
 
-</table>
+<table bgcolor = "#93c9ff" width=90% cellpadding=10px border=1>
 
-<hr width = 100%>
-
-<table width = 80% align=center border = 1>
 <tr>
-<td>Name: </td>
-<td>Phone: </td>
-<td>Scheduled Pickup: </td>
+<td width=32%>Student Name: {{row["name"]}}</td>
+<td width=32%>Phone Number: {{row["phone"]}}</td>
+<td>Requested Pickup Time: {{row["time"]}}</td>
 </tr><tr>
-<td>UO ID: </td>
-<td>To Addr: </td>
-<td>From Addr: </td>
+<td>Student ID: {{row["uo_id"]}}</td>
+<td>Destination: {{row["to_addr"]}}</td>
+<td>Pickup Location: {{row["from_addr"]}}</td>
 </tr><tr>
-<td>Riders: </td>
-<td>Active Request: </td>
-<td>Number of Offenses: </td>
+<td>No. Passengers: {{row["riders"]}}</td>
+<td>Active Request: {{row["active"]}}</td>
+<td>Infractions: </td>
 </tr><tr>
-<td><form><input type = "submit" value = "Approve & Generate Code" onClick="history.go()"></form></td>
-<td><form><input type = "submit" value = "Remove & Deny" onClick="history.go()"></form></td>
+<td><input type="button" value="Generate Code" onclick="document.getElementById('{{row["uo_id"]}}').value='=SPLIT({{row["name"]}}, {{row["phone"]}})';"></a></td>
+<td><form><input type = "submit" value = "Remove & Deny" ></form></td>
 </tr><tr>
-<td>Code: </a>
+<td colspan=3>Code: 
+<input type="text" id="{{row["uo_id"]}}" value="" size=40></a>
+<input type="button" value="Copy to Clipboard" onClick="window.clipboardData.setData('=', 2);"></a>
+</td>
+</tr>
 </table>
 
+<p>
+<hr width = 90%>
+<p>
+{% endfor %}
 
 
-<p>
-<p>
+
 <center><a href = "/">Go back to portal</a></center>
 </body>
 </html>
