@@ -38,7 +38,7 @@ def rider():
                 con.close()
 
 
-@app.route('/dispatch_display')
+@app.route('/dispatch_display', methods=['GET', 'POST'])
 def dispatch():
     con = sql.connect("database.db")
     con.row_factory = sql.Row
@@ -47,6 +47,15 @@ def dispatch():
     cur.execute("select * from requests order by time")
 
     rows = cur.fetchall()
+
+    if request.method == 'POST':
+        try:
+            thing = request.form['tyme']
+        except:
+            thing = "whoops"
+        finally:
+            return render_template("dispatch_display.html",rows = rows,thing = thing)
+    
     return render_template("dispatch_display.html",rows = rows)
 
 if __name__ == '__main__':
