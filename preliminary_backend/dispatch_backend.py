@@ -50,11 +50,11 @@ def dispatch():
 
     if request.method == 'POST':
         try:
-            thing = request.form['tyme']
+            name_app = request.form['name_input']
         except:
             thing = "whoops"
         finally:
-            return render_template("dispatch_display.html",rows = rows,thing = thing)
+            return render_template("dispatch_display.html",rows = rows,name_app = name_app)
     
     return render_template("dispatch_display.html",rows = rows)
 
