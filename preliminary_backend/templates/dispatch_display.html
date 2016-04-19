@@ -1,43 +1,92 @@
 <!doctype html>
 <html>
+<head>
+
+<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/index.css" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+ </head>
+
+
+
 <body>
 
-<center><h1>SafeRide Dispatch Station</h1></center>
+<center>
+<table width=95%>
+<tr>
+<td>
+<h1 class="text-muted">SafeRide Dispatch Station: {{ name_app }}</h1></center><p>
+</td>
+</tr>
+</table>
+
+<hr width=90%>
+
 
 <p>
 
 <center>
 
 {% for row in rows %}
+<form method="POST">
+<div class="container-fluid">
+	<div class="well" style="background-color:lightblue">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
 
-<table bgcolor = "#93c9ff" width=90% cellpadding=10px border=1>
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#{{row["uo_id"]}}code" onClick="document.getElementById('{{row["uo_id"]}}').value='=SPLIT({{row["time"]}}, {{row["riders"]}}, {{row["from_addr"]}}, {{row["to_addr"]}}, {{row["name"]}}, {{row["phone"]}}, {{row["uo_id"]}}, {{row["comments"]}})';"  style="text-decoration:none;">
+			
+		  <div class="tester">
+			<table width=100% cellpadding=20px>
+			<tr>
+			<td width=30%><p><b>Student Name:</b><br>&nbsp;&nbsp;&nbsp; {{row["name"]}}
+				<input type="text" name="name_input"  value="{{row["name"]}}" />
+			<p></td>
+			<td width=30%><p><b>Phone Number:</b><br>&nbsp;&nbsp;&nbsp; {{row["phone"]}}
+				<input type="text" name="phone_input"  value="{{row["phone"]}}" />
+			<p></td>
+			<td><p><b>Requested Pickup Time:</b><br>&nbsp;&nbsp;&nbsp; {{row["time"]}}
+				<input type="text" name="time_input"  value="{{row["time"]}}" />
+			<p></td>
+			</tr><p><tr>
+			<td><p><b>Student ID:</b><br>&nbsp;&nbsp;&nbsp; {{row["uo_id"]}}<p></td>
+			<td><p><b>Destination:</b><br>&nbsp;&nbsp;&nbsp; {{row["to_addr"]}}<p></td>
+			<td><p><b>Pickup Location:</b><br>&nbsp;&nbsp;&nbsp; {{row["from_addr"]}}<p></td>
+			</tr><tr>
+			<td><p><b>No. Passengers:</b><br>&nbsp;&nbsp;&nbsp; {{row["riders"]}}<p></td>
+			<td><p><b>Active Request:</b><br>&nbsp;&nbsp;&nbsp; {{row["active"]}}<p></td>
+			<td><p><b>Infractions:</b><br>&nbsp;&nbsp;&nbsp; <p></td>
+			</tr><tr>
+			<td colspan=3><p><b>Other Comments:</b><br></td>
+			</tr>
+			</table>
+		  </div>
+		  </a>
+        </h4>
+     </div>
+		
+		<div id="{{row["uo_id"]}}code" class="panel-collapse collapse">
+		<div class="panel-body"><p>
+			<b>Code:</b> <input type="text" id="{{row["uo_id"]}}" value="" size=100%></a><p>
+		<div class="panel-footer"><input type="submit" value="Approve">&nbsp;&nbsp;<input type = "submit" value = "Remove & Deny" ></a></div>
+		</div>
+		</div>
+		</form>
 
-<tr>
-<td width=32%>Student Name: {{row["name"]}}</td>
-<td width=32%>Phone Number: {{row["phone"]}}</td>
-<td>Requested Pickup Time: {{row["time"]}}</td>
-</tr><tr>
-<td>Student ID: {{row["uo_id"]}}</td>
-<td>Destination: {{row["to_addr"]}}</td>
-<td>Pickup Location: {{row["from_addr"]}}</td>
-</tr><tr>
-<td>No. Passengers: {{row["riders"]}}</td>
-<td>Active Request: {{row["active"]}}</td>
-<td>Infractions: </td>
-</tr><tr>
-<td><input type="button" value="Generate Code" onclick="document.getElementById('{{row["uo_id"]}}').value='=SPLIT({{row["name"]}}, {{row["phone"]}})';"></a></td>
-<td><form><input type = "submit" value = "Remove & Deny" ></form></td>
-</tr><tr>
-<td colspan=3>Code: 
-<input type="text" id="{{row["uo_id"]}}" value="" size=40></a>
-<input type="button" value="Copy to Clipboard" onClick="window.clipboardData.setData('=', 2);"></a>
-</td>
-</tr>
-</table>
+  </div>
+</div>
+</div>
+</div>
 
-<p>
-<hr width = 90%>
-<p>
 {% endfor %}
 
 
