@@ -21,11 +21,12 @@ def rider():
             tddr = request.form['to_addr']
             fddr = request.form['from_addr']
             rdrs = request.form['riders']
+            cmts = request.form['comments']
 
             with sql.connect("database.db") as con:
                 cur = con.cursor()
 
-                cur.execute("INSERT INTO requests (name,time,phone,uo_id,to_addr,from_addr,riders,active) VALUES (?,?,?,?,?,?,?,'Yes')",(nm,tm,phn,uoid,tddr,fddr,rdrs) )
+                cur.execute("INSERT INTO requests (name,time,phone,uo_id,to_addr,from_addr,riders,active,comments) VALUES (?,?,?,?,?,?,?,'Yes',?)",(nm,tm,phn,uoid,tddr,fddr,rdrs,cmts) )
             
                 con.commit()
                 msg = "Record successfully added"
@@ -38,7 +39,7 @@ def rider():
                 con.close()
 
 
-@app.route('/dispatch_display', methods=['GET', 'POST'])
+@app.route('/dispatch_display', methods=['POST', 'GET'])
 def dispatch():
     con = sql.connect("database.db")
     con.row_factory = sql.Row
@@ -47,14 +48,24 @@ def dispatch():
     cur.execute("select * from requests order by time")
 
     rows = cur.fetchall()
-
+    con.close()
+    
     if request.method == 'POST':
         try:
             name_app = request.form['name_input']
+            thing = name_app
+            
+            con2 = sql.connect("master.db")
+            cur2 = con2.cursor()
+
+            
+            con2.commit()
         except:
+
             thing = "whoops"
         finally:
-            return render_template("dispatch_display.html",rows = rows,name_app = name_app)
+            return render_template("dispatch_display.html",rows = rows,name_app = name_app, thing=thing)
+                    
     
     return render_template("dispatch_display.html",rows = rows)
 
