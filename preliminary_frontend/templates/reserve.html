@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SafeRide | University of Oregon | Reserve</title>
+ 
+    <link href="../static/template.css" rel="stylesheet">
+    <link href="../static/reserve.css" rel="stylesheet">
+    
+  </head>
+ 
+  <body>
+ 
+    <div class="container">
+      <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="http://pages.uoregon.edu/saferide/index.html">Home</a>
+                    </li>
+                    <li role="presentation"><a href="#">Cancel</a>
+                    </li>
+                    <li role="presentation"><a href="#">Log In</a>
+                    </li>
+                </ul>
+            </nav>
+            <h2 class="text-muted">SafeRide</h2>
+        </div>
+ 
+      <div class="jumbotron">
+        <h2>Reserve a Ride for Today</h2>
+        
+        <form class="form-signin">
+          <label for="inputID" class="sr-only">ID</label>
+          <input type="ID" name="inputID" id="inputID" class="form-control" placeholder="Student ID" required autofocus>
+          <label for="inputName" class="sr-only">Name</label>
+          <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Student Name" required>
+          <label for="inputPhone" class="sr-only">PhoneNo</label>
+          <input type="phone" name="inputPhone" id="inputPhone" class="form-control" placeholder="Phone number" required>
+          <label for="inputTime" class="sr-only">Time</label>
+          <input type="resTime" name="inputTime" id="inputTime" class="form-control" placeholder="When should we pick you up?" required>
+          <label for="inputFrom" class="sr-only">CurrentAddr</label>
+          <input type="fromAddr" name="inputFrom" id="inputFrom" class="form-control" placeholder="Where should we pick you up?" required>
+          <label for="inputTo" class="sr-only">DestAddr</label>
+          <input type="toAddr" name="inputTo" id="inputTo" class="form-control" placeholder="Where do you want to go?" required>
+        </form>
+        
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         Action <span class="caret"></span>
+        </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+
+        <form class="form-signin">
+          <label for="inputComment" class="sr-only">Comment</label>
+          <input type="comment" name="inputComment" id="inputComment" class="form-control" placeholder="Other comments ...">
+        </form>
+      
+        <p><a class="btn btn-lg btn-primary btn-block" href="#" role="button">Reserve</a>
+        </p>
+      </div>
+
+
+ 
+      <footer class="footer">
+        <p>Contact Us: 541-346-7433</p>
+      </footer>
+  </body>
+</html>
