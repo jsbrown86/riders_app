@@ -8,8 +8,36 @@ def home():
 
 @app.route('/enternew')
 def new_request():
-    return render_template("reserve.html")
+    return render_template('reserve.html')
 
+@app.route('/showLogin')
+def showLogin():
+    return render_template('login.html')
+
+@app.route('/showCancel')
+def cancel():
+    return render_template('cancel.html')
+
+@app.route('/toHome')
+def toHome():
+    return render_template('index.html')
+
+@app.route('/showReserve')
+def showReserve():
+    return render_template('reserve.html')
+
+@app.route('/submitty', methods = ['POST', 'GET'])
+def submitty():
+    if request.method == 'POST':
+        user = request.form['inputUser']
+        pw = request.form['inputPW']
+        if user == 'admin' and pw == 'pw':
+            login_msg = 'Login successful!'
+        else:
+            login_msg = 'Login failure'
+        return render_template('dispatch_login_results.html', login_msg = login_msg)
+    return render_template('dispatch_login_results.html', login_msg = login_msg)
+        
 @app.route('/rider',methods = ['POST', 'GET'])
 def rider():
     if request.method == 'POST':
@@ -20,7 +48,7 @@ def rider():
             uoid = request.form['inputID']
             tddr = request.form['inputTo']
             fddr = request.form['inputFrom']
-            rdrs = request.form['riders']
+            rdrs = request.form.get('inputRiders')
             cmts = request.form['inputComment']
 
             with sql.connect("database.db") as con:
