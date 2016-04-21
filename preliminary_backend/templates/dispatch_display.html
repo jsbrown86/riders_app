@@ -19,19 +19,16 @@
 <body>
 
 <center>
-<table width=95%>
+<table width=85%>
 <tr>
 <td>
-<h1 class="text-muted">SafeRide Dispatch Station: {{ name_app }} {{ thing }}</h1></center><p>
+<h3 class="text-muted">SafeRide Dispatch Station</h3></center>
 </td>
 </tr>
 </table>
 
 <hr width=90%>
 
-Insert button to enter new entry here
-
-<hr width=90%>
 <p>
 
 <center>
@@ -53,37 +50,37 @@ Insert button to enter new entry here
 			<table width=100% cellpadding=20px>
 			<tr>
 			<td width=30%><p><b>Student Name:</b><br>&nbsp;&nbsp;&nbsp; {{row["name"]}}
-				<input type="text" name="name_input"  value="{{row["name"]}}" />
+				<input type="hidden" name="name_input"  value="{{row["name"]}}" />
 			<p></td>
 			<td width=30%><p><b>Phone Number:</b><br>&nbsp;&nbsp;&nbsp; {{row["phone"]}}
-				<input type="text" name="phone_input"  value="{{row["phone"]}}" />
+				<input type="hidden" name="phone_input"  value="{{row["phone"]}}" />
 			<p></td>
 			<td><p><b>Requested Pickup Time:</b><br>&nbsp;&nbsp;&nbsp; {{row["time"]}}
-				<input type="text" name="time_input"  value="{{row["time"]}}" />
+				<input type="hidden" name="time_input"  value="{{row["time"]}}" />
 			<p></td>
 			</tr><p><tr>
 			<td><p><b>Student ID:</b><br>&nbsp;&nbsp;&nbsp; {{row["uo_id"]}}
-				<input type="text" name="id_input" value="{{row["uo_id"]}}" />
+				<input type="hidden" name="id_input" value="{{row["uo_id"]}}" />
 			<p></td>
 			<td><p><b>Destination:</b><br>&nbsp;&nbsp;&nbsp; {{row["to_addr"]}}
-				<input type="text" name="to_addr_input" value="{{row["to_addr"]}}" />
+				<input type="hidden" name="to_addr_input" value="{{row["to_addr"]}}" />
 			<p></td>
 			<td><p><b>Pickup Location:</b><br>&nbsp;&nbsp;&nbsp; {{row["from_addr"]}}
-				<input type="text" name="from_addr_input" value="{{row["from_addr"]}}" />
+				<input type="hidden" name="from_addr_input" value="{{row["from_addr"]}}" />
 			<p></td>
 			</tr><tr>
 			<td><p><b>No. Passengers:</b><br>&nbsp;&nbsp;&nbsp; {{row["riders"]}}
-				<input type="text" name="riders_input" value="{{row["riders"]}}" />
+				<input type="hidden" name="riders_input" value="{{row["riders"]}}" />
 			<p></td>
 			<td><p><b>Active Request:</b><br>&nbsp;&nbsp;&nbsp; {{row["active"]}}
-				<input type="text" name="request_input" value="{{row["request"]}}" />
+				<input type="hidden" name="request_input" value="{{row["request"]}}" />
 			<p></td>
-			<td><p><b>Infractions:</b><br>&nbsp;&nbsp;&nbsp; {{row["offenses"]}}
-				<input type="text" name="infractions_input" value="{{row["offenses"]}}" />
+			<td><p><b>Current Standing:</b><br>&nbsp;&nbsp;&nbsp; {{row["offenses"]}}
+				<input type="hidden" name="infractions_input" value="{{row["offenses"]}}" />
 			<p></td>	
 			</tr><tr>
 			<td colspan=3><p><b>Other Comments:</b><br> &nbsp;&nbsp;&nbsp; {{row["comments"]}}
-				<input type="text" name="comments_input" value="{{row["comments"]}}" />
+				<input type="hidden" name="comments_input" value="{{row["comments"]}}" />
 			</td>
 			</tr>
 			</table>
@@ -95,7 +92,9 @@ Insert button to enter new entry here
 			<div id="{{row["uo_id"]}}code" class="panel-collapse collapse">
 		<div class="panel-body"><center>
 			<b>Code:</b> <input type="text" id="{{row["uo_id"]}}" value='=SPLIT("{{row["time"]}}~ {{row["riders"]}}~ {{row["from_addr"]}}~ {{row["to_addr"]}}~ {{row["name"]}}~ {{row["phone"]}}~ {{row["uo_id"]}}~ {{row["comments"]}}", "~")'" size=100%></a><p></center>
-		<div class="panel-footer"><center><input type="submit" value="Approve"></a>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Reject">&nbsp;&nbsp;&nbsp;&nbsp;Adjust Standing: <select><option value="good">Good</option><option value="okay">Okay</option><option value="bad">No good</option></select></center></div>
+		<div class="panel-footer"><center><input type="submit" name="button" value="Submit Changes & Remove"></a>&nbsp;&nbsp;&nbsp;&nbsp; No Ride List?: <input type="checkbox" name="bad_input" value="false">
+		
+		</center></div>
 		</div>
 		</div>
 		</form>
@@ -111,6 +110,8 @@ Insert button to enter new entry here
 </table>
 </center>
 
+
+<hr width=90%>
 
 <center><a href = "/">Go back to portal</a></center>
 </body>
