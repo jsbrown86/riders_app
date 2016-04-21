@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SafeRide | University of Oregon | Reserve</title>
+    <title>SafeRide | Reserve</title>
  
     <link href="../static/template.css" rel="stylesheet">
     <link href="../static/reserve.css" rel="stylesheet">
@@ -14,11 +14,11 @@
       <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="http://pages.uoregon.edu/saferide/index.html">Home</a>
+                    <li role="presentation"><a href="../templates/index.html">Home</a>
                     </li>
-                    <li role="presentation"><a href="#">Cancel</a>
+                    <li role="presentation" class="active"><a href="#">Reserve</a>
                     </li>
-                    <li role="presentation"><a href="#">Log In</a>
+                    <li role="presentation"><a href="../templates/cancel.html">Cancel a ride</a>
                     </li>
                 </ul>
             </nav>
@@ -36,37 +36,42 @@
           <label for="inputPhone" class="sr-only">PhoneNo</label>
           <input type="phone" name="inputPhone" id="inputPhone" class="form-control" placeholder="Phone number" required>
           <label for="inputTime" class="sr-only">Time</label>
-          <input type="resTime" name="inputTime" id="inputTime" class="form-control" placeholder="When should we pick you up?" required>
+          <input type="resTime" name="inputTime" id="inputTime" class="form-control" placeholder="Pick up time (e.g. 14:30)" required>
           <label for="inputFrom" class="sr-only">CurrentAddr</label>
-          <input type="fromAddr" name="inputFrom" id="inputFrom" class="form-control" placeholder="Where should we pick you up?" required>
+          <input type="fromAddr" name="inputFrom" id="inputFrom" class="form-control" placeholder="Where do we pick you up?" required>
           <label for="inputTo" class="sr-only">DestAddr</label>
           <input type="toAddr" name="inputTo" id="inputTo" class="form-control" placeholder="Where do you want to go?" required>
         </form>
-        
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-         Action <span class="caret"></span>
-        </button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
 
+        <div class="dropdown">
+        <button type="numGroup" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         Size of Your Group <span class="caret"></span>
+        </button>
+          <div class="dropdown-menu">
+            <li><a href="#">Only you</a></li>
+            <li><a href="#">Two People</a></li>
+            <li><a href="#">Three people</a></li>
+          </div>
+        </div>
+  
         <form class="form-signin">
           <label for="inputComment" class="sr-only">Comment</label>
           <input type="comment" name="inputComment" id="inputComment" class="form-control" placeholder="Other comments ...">
         </form>
-      
-        <p><a class="btn btn-lg btn-primary btn-block" href="#" role="button">Reserve</a>
-        </p>
+
+        <p><a class="btn gtn-lg btn-primary" href="#" role="button">Reserve</a></p>
       </div>
 
-
- 
       <footer class="footer">
         <p>Contact Us: 541-346-7433</p>
       </footer>
-  </body>
+    </div>
+</body>
 </html>
+<script src="content/js/jquery.min.js"></script>
+<script src="content/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
