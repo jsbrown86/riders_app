@@ -45,29 +45,48 @@ def dispatch():
     con.row_factory = sql.Row
 
     cur = con.cursor()
-    cur.execute("select * from requests order by time")
+    cur.execute("select * from requests where active == 'Yes' order by time ")
 
     rows = cur.fetchall()
-    con.close()
+
+    con = sql.connect("master.db")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("select * from mdb")
+    rows2 = cur.fetchall()
+    
+    bad_app = request.form.get('bad_input', default=False, type=bool)
+    thing = "Initial thing"
     
     if request.method == 'POST':
-        try:
-            name_app = request.form['name_input']
-            thing = name_app
-            
-            con2 = sql.connect("master.db")
-            cur2 = con2.cursor()
+        name_app = request.form['name_input']
+        id_app = request.form['id_input']
+        
+        con = sql.connect("database.db")
+        cur = con.cursor()
 
-            
-            con2.commit()
-        except:
+        cur.execute("update requests set active = 'No' where uo_id = ?", [id_app])
+        con.commit()
+        con.close
+        
+        if bad_app == True:
+            try:
+                con = sql.connect("master.db")
+                cur = con.cursor()
+                            
+                cur.execute("INSERT INTO mdb (uoid) VALUES (?)", [id_app] )
+                            
+                con.commit()
 
-            thing = "whoops"
-        finally:
-            return render_template("dispatch_display.html",rows = rows,name_app = name_app, thing=thing)
-                    
-    
-    return render_template("dispatch_display.html",rows = rows)
+            except:
+                oon.rollback()
+                thing = "Something went wrong"
+            
+            finally:
+                return render_template("dispatch_results.html",rows = rows,name_app = name_app, thing=thing, rows2=rows2)
+
+        return render_template("dispatch_results.html",rows = rows,name_app = name_app, thing=thing, rows2=rows2)
+    return render_template("dispatch_display.html",rows = rows, rows2=rows2,thing = thing)
 
 if __name__ == '__main__':
     app.run(debug = True)
