@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SafeRide | Reserve</title>
+    <title>SafeRide | Admin login</title>
  
     <link href="../static/template.css" rel="stylesheet">
     <link href="../static/reserve.css" rel="stylesheet">
@@ -14,7 +14,7 @@
       <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation"><a href="../templates/index.html">Go Back</a>
+                    <li role="presentation"><a href="toHome">Go Back</a>
                     </li>
                 </ul>
             </nav>
@@ -24,14 +24,17 @@
       <div class="jumbotron">
         <h2>Admin Log in</h2>
         
-        <form class="form-signin">
-          <label for="inputID" class="sr-only">ID</label>
-          <input type="ID" name="inputID" id="inputID" class="form-control" placeholder="Username" required autofocus>
-          <label for="inputName" class="sr-only">Name</label>
-          <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Password" required>
-        </form>
-
+        <form action = {{url_for('submitty')}} method="POST">
+          <label for="inputUser" class="sr-only">ID</label>
+          <input type="text" name="inputUser" id="inputUser" class="form-control" placeholder="Username" required autofocus>
+          <label for="inputPW" class="sr-only">PW</label>
+          <input type="text" name="inputPW" id="inputPW" class="form-control" placeholder="Password" required>
+        
+        <!--
         <p><a class="btn gtn-lg btn-primary" href="adminLog" role="button">Submit</a></p>
+      -->
+      <p><input type="submit" value="submit"/><p>
+      </form>
       </div>
 
       <footer class="footer">
