@@ -46,9 +46,10 @@ body {
   border-bottom-left-radius: 0;
 }
 .form-signin input[type="comment"] {
-  margin-bottom: 2px;
+  margin-bottom: 12px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  padding: 30px 20px;
 }
 
 .header {
@@ -57,12 +58,16 @@ body {
 }
 
 .jumbotron {
-  padding-top: 18px;
+  padding-top: 12px;
   padding-bottom: 14px;
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
 
+.btn-primary {
+  font-size: 20px;
+  width: 30%;
+}
 
 /* Customize container */
 @media (min-width: 768px) {
