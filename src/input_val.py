@@ -66,6 +66,16 @@ def Address_to_Long_Lat(address):
     >>> None
     '''
 
+    #first, make sure address is sufficiently clear, and sanitize it
+    address = address.lower()
+    address = address.strip()
+
+    if "eugene" not in address:
+        address = address + " eugene"
+
+    if "oregon" not in address:
+        address = address + " oregon"
+
     #get coordinates from geolocator
     geolocator = Nominatim()
     location = geolocator.geocode(address)
@@ -101,15 +111,6 @@ def Is_In_Bounds(address):
     Is_In_Bounds("")
     >>> False
     '''
-    #first, make sure address is sufficiently clear, and sanitize it
-    address = address.lower()
-    address = address.strip()
-
-    if "eugene" not in address:
-        address = address + " eugene"
-
-    if "oregon" not in address:
-        address = address + " oregon"
 
     #get lat long
     coordinates = Address_to_Long_Lat(address)

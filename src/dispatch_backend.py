@@ -1,6 +1,12 @@
 from flask import Flask, render_template, request
 import sqlite3 as sql
+from input_val import *
+from Map_util import *
+from flask_googlemaps import GoogleMaps
+from flask_googlemaps import Map
+
 app = Flask(__name__)
+GoogleMaps(app)
 
 @app.route('/')
 def home():
@@ -40,6 +46,7 @@ def submitty():
         
 @app.route('/rider',methods = ['POST', 'GET'])
 def rider():
+    msg = "eh"
     if request.method == 'POST':
         try:
             nm = request.form['inputName']
@@ -50,6 +57,30 @@ def rider():
             fddr = request.form['inputFrom']
             rdrs = request.form.get('inputRiders')
             cmts = request.form['inputComment']
+
+            bad = False
+            thing = ''
+            #failure_1 = ''
+            #failure_2 = ''
+            my_map = ''
+
+            if (Is_In_Bounds(tddr)==False) or (Is_In_Bounds(fddr) == False):
+                #failure_1 = "INPUT ERROR: One or both of the addresses you entered is outside Safe Ride's Boundaries"
+                bad = True
+
+            if (Id_is_Valid(uoid)) == False:
+                #failure_2 = "INPUT ERROR: The UO ID you entered is not valid"
+                bad = True
+
+            if bad:
+                thing = "UH-OH, you dun entered the information wrong, asshole"
+
+            else:
+                pickup = Address_to_Long_Lat(fddr)
+                dropoff = Address_to_Long_Lat(tddr)
+
+                my_map = make_map(pickup[0], pickup[1], dropoff[0], dropoff[1])
+                
 
             with sql.connect("database.db") as con:
                 cur = con.cursor()
@@ -63,7 +94,7 @@ def rider():
                 msg = "Error in submitting request - are one of the fields empty?"
 
         finally:
-                return render_template("map.html",msg = msg)
+                return render_template("map.html",msg = msg,thing=thing, my_map=my_map)
                 con.close()
 
 
