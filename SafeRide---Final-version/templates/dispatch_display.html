@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+
+<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/index.css" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+ </head>
+
+
+
+<body>
+
+<center>
+<table width=85%>
+<tr>
+<td>
+<h3 class="text-muted">SafeRide Dispatch Station</h3></center>
+</td>
+</tr>
+</table>
+
+<hr width=90%>
+
+<p>
+
+<center>
+<table width=85%>
+<tr>
+<td>
+{% for row in rows %}
+<form action="{{ url_for('dispatch') }}" method="POST">
+<div class="container-fluid">
+	<div class="well" style="background-color:lightblue">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#{{row["uo_id"]}}code" style="text-decoration:none;">
+			
+		 
+			<table width=100% cellpadding=20px>
+			<tr>
+			<td width=30%><p><b>Student Name:</b><br>&nbsp;&nbsp;&nbsp; {{row["name"]}}
+				<input type="hidden" name="name_input"  value="{{row["name"]}}" />
+			<p></td>
+			<td width=30%><p><b>Phone Number:</b><br>&nbsp;&nbsp;&nbsp; {{row["phone"]}}
+				<input type="hidden" name="phone_input"  value="{{row["phone"]}}" />
+			<p></td>
+			<td><p><b>Requested Pickup Time:</b><br>&nbsp;&nbsp;&nbsp; {{row["time"]}}
+				<input type="hidden" name="time_input"  value="{{row["time"]}}" />
+			<p></td>
+			</tr><p><tr>
+			<td><p><b>Student ID:</b><br>&nbsp;&nbsp;&nbsp; {{row["uo_id"]}}
+				<input type="hidden" name="id_input" value="{{row["uo_id"]}}" />
+			<p></td>
+			<td><p><b>Destination:</b><br>&nbsp;&nbsp;&nbsp; {{row["to_addr"]}}
+				<input type="hidden" name="to_addr_input" value="{{row["to_addr"]}}" />
+			<p></td>
+			<td><p><b>Pickup Location:</b><br>&nbsp;&nbsp;&nbsp; {{row["from_addr"]}}
+				<input type="hidden" name="from_addr_input" value="{{row["from_addr"]}}" />
+			<p></td>
+			</tr><tr>
+			<td><p><b>No. Passengers:</b><br>&nbsp;&nbsp;&nbsp; {{row["riders"]}}
+				<input type="hidden" name="riders_input" value="{{row["riders"]}}" />
+			<p></td>
+			<td><p><b>Active Request:</b><br>&nbsp;&nbsp;&nbsp; {{row["active"]}}
+				<input type="hidden" name="request_input" value="{{row["request"]}}" />
+			<p></td>
+			<td><p><b>Current Standing:</b><br>&nbsp;&nbsp;&nbsp; {{row["offenses"]}}
+				<input type="hidden" name="infractions_input" value="{{row["offenses"]}}" />
+			<p></td>	
+			</tr><tr>
+			<td colspan=3><p><b>Other Comments:</b><br> &nbsp;&nbsp;&nbsp; {{row["comments"]}}
+				<input type="hidden" name="comments_input" value="{{row["comments"]}}" />
+			</td>
+			</tr>
+			</table>
+		 
+		  </a>
+        </h4>
+     </div>
+		
+			<div id="{{row["uo_id"]}}code" class="panel-collapse collapse">
+		<div class="panel-body"><center>
+			<b>Code:</b> <input type="text" id="{{row["uo_id"]}}" value='=SPLIT("{{row["time"]}}~ {{row["riders"]}}~ {{row["from_addr"]}}~ {{row["to_addr"]}}~ {{row["name"]}}~ {{row["phone"]}}~ {{row["uo_id"]}}~ {{row["comments"]}}", "~")'" size=100%></a><p></center>
+		<div class="panel-footer"><center><input type="submit" name="button" value="Submit Changes & Remove"></a>&nbsp;&nbsp;&nbsp;&nbsp; No Ride List?: <input type="checkbox" name="bad_input" value="false">
+		
+		</center></div>
+		</div>
+		</div>
+		</form>
+
+  </div>
+</div>
+</div>
+</div>
+
+{% endfor %}
+</tr>
+</td>
+</table>
+</center>
+
+
+<hr width=90%>
+
+<center><a href = "/">Go back to portal</a></center>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!--
+    reserve.html
+    Author: Zhibin Zhang
+    takes form of users' information and send it to backend for reservation
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>SafeRide | Reserve a ride</title>
+    <link href="../static/template.css" rel="stylesheet">
+    <link href="../static/reserve.css" rel="stylesheet">
+    
+    <!-- for Group Size dropdowns -->
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+  </head>
+ 
+  <body>
+    <div class="container">
+      <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="toHome">Home</a></li>
+                    <li role="presentation" class="active"><a href="#">Reserve</a></li>
+                    <li role="presentation"><a href="showCancel">Cancel a ride</a></li>
+                </ul>
+            </nav>
+            <h2 class="text-muted">SafeRide</h2>
+      </div>
+ 
+      <div class="jumbotron">
+        <h2>Reserve a Ride for Today</h2>
+        <form action={{url_for('rider')}} method="POST">
+        <table width=50% align=center><tr><td>
+          <label for="inputID" class="sr-only">ID</label>
+          <input type="text" name="inputID" id="inputID" class="form-control" placeholder="Student ID" required autofocus>
+          <label for="inputName" class="sr-only">Name</label>
+          <input type="text" name="inputName" id="inputName" class="form-control" placeholder="Student Name" required>
+          <label for="inputPhone" class="sr-only">PhoneNo</label>
+          <input type="text" name="inputPhone" id="inputPhone" class="form-control" placeholder="Phone number" required>
+          <label for="inputTime" class="sr-only">Time</label>
+          <input type="text" name="inputTime" id="inputTime" class="form-control" placeholder="Pick up time (e.g. 14:30)" required>
+          <label for="inputFrom" class="sr-only">CurrentAddr</label>
+          <input type="text" name="inputFrom" id="inputFrom" class="form-control" placeholder="Where do we pick you up?" required>
+          <label for="inputTo" class="sr-only">DestAddr</label>
+          <input type="text" name="inputTo" id="inputTo" class="form-control" placeholder="Where do you want to go?" required>
+        
+          <select class="selectpicker form-control" multiple title="Group Size" multiple data-max-options="1" name="inputRiders">
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+          </select>
+        
+          <label for="inputComment" class="sr-only">Comment</label>
+          <input type="text" name="inputComment" id="inputComment" class="form-control" placeholder="Other comments ...">
+        
+          <p><input class="btn gtn-lg btn-primary" type="submit" value="Reserve"/></p>
+        </form>
+      </td></tr></table>
+      </div>
+
+      <footer class="footer">
+        <p>Contact Us: 541-346-7433</p>
+      </footer>
+    </div>
+</body>
+</html>

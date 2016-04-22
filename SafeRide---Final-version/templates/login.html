@@ -1,0 +1,49 @@
+<!--
+    login.html
+    Author: Zhibin Zhang
+    backend login page
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SafeRide | Admin login</title>
+ 
+    <link href="../static/template.css" rel="stylesheet">
+    <link href="../static/cancel.css" rel="stylesheet">
+    
+  </head>
+ 
+  <body>
+ 
+    <div class="container">
+      <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="toHome">Go Back</a>
+                    </li>
+                </ul>
+            </nav>
+            <h2 class="text-muted">SafeRide</h2>
+        </div>
+ 
+      <div class="jumbotron">
+        <h2>SafeRide Admin</h2>
+        
+        <form action = {{url_for('submitty')}} method="POST">
+          <table width=50% align=center><tr><td>
+          <label for="inputUser" class="sr-only">ID</label>
+          <input type="text" name="inputUser" id="inputUser" class="form-control" placeholder="Username" required autofocus>
+          <label for="inputPW" class="sr-only">PW</label>
+          <input type="text" name="inputPW" id="inputPW" class="form-control" placeholder="Password" required>
+        
+      <p><input class="btn gtn-lg btn-primary" type="submit" value="Log in"/><p>
+        </td></tr></table>
+      </form>
+      </div>
+
+      <footer class="footer">
+        <p>SafeRide Aministration</p>
+      </footer>
+    </div>
+</body>
+</html>

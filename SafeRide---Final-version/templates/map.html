@@ -1,0 +1,36 @@
+<!--
+    map.html
+    Author: Zhibin Zhang
+    Confirmation page for reservation that additionally shows a map
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	{{my_map.js}}
+    <title>SafeRide | Cancel a ride</title>
+ 
+    <link href="../static/template.css" rel="stylesheet">
+    <link href="../static/cancel.css" rel="stylesheet">
+    
+  </head>
+ 
+  <body>
+ 
+    <div class="container">
+      <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="showReserve">Go Back</a></li>
+                </ul>
+            </nav>
+            <h2 class="text-muted">SafeRide</h2>
+      </div>
+
+      <div class="jumbotron">
+      	<h2>{{msg}}</h2>
+      	<h2>{{goBackMsg}}</h2>
+        <center>{{ my_map.html }}</center>
+      </div>
+    </div>
+	</body>
+</html>
