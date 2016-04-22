@@ -1,0 +1,60 @@
+/*  
+    cancel.css
+    Author: Zhibin Zhang
+    Modifies cancel.html, login.html, map.html
+*/
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.form-control {
+  position: relative;
+  height: auto;
+  padding: 12px;
+  font-size: 16px;
+}
+.header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron {
+  padding-top: 18px;
+  padding-bottom: 14px;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.btn-primary {
+  margin-top: 14px;
+  width: 148px;
+  font-size: 18px;
+  height: 44px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow {
+  margin: 30px 0;
+}
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+@media screen and (min-width: 500px) {
+  .header,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .header {
+    margin-bottom: 20px;
+  }
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
