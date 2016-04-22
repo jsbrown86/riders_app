@@ -1,1 +1,20 @@
+SafeRide App by the Riders (Zhibin Zhang, Conor Tracey, Jacob Brown)
+for CIS 422 Spring 2016
+Project 1
 
+This project uses HTML, CSS, Bootstrap, Python/Flask, Google Maps, and SQLite to allow users to submit a request online to a
+simple database which can then be accessed by dispatchers. Dispatchers are able to copy a code from these requests into a Google
+spreadsheet and erase the entry from the database. If the user's addresses are valid, a page will display them both on a map.
+
+Files/folders of note:
+   "database_init.py" initializes a simple database called "requests"
+   "master_init.py" initializes a simple database which users with bad standing are put into
+   "dispatch_display.py" is the file that is responsible to accepting user input, accessing databases, and directing users 
+      throughout the site.
+   "input_val.py" checks whether the addresses entered are valid and if the student ID is in the correct format
+   "map_util.py" is used to integrate Google Maps with flask
+   "templates" contains each of the web-pages to be displayed by dispatch_display.py.
+
+Front-end design by Zhibin Zhang
+Map configuration by Conor Tracey
+Back-end design by Jacob Brown
