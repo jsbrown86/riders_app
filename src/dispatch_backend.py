@@ -1,3 +1,16 @@
+"""
+backend.py
+
+Author:       Jacob Brown
+
+Last Updated: Apr 22, 2016
+
+This program is responsible for the functionality of the SafeRide App by the
+Riders (myself, Conor, Zhibin). Depends on an input validation program and
+map validation program by Conor Tracey.
+
+"""
+
 from flask import Flask, render_template, request
 import sqlite3 as sql
 from input_val import *
@@ -8,6 +21,7 @@ from flask_googlemaps import Map
 app = Flask(__name__)
 GoogleMaps(app)
 
+# Simple routes to various pages
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -32,6 +46,10 @@ def toHome():
 def showReserve():
     return render_template('reserve.html')
 
+# This is used for the dispatch login page - anything other than the username
+# and password described below will route the user to a login failure page.
+# Otherwise, they'll be routed to a login success page, which will bring them
+# to the dispatch page.
 @app.route('/submitty', methods = ['POST', 'GET'])
 def submitty():
     if request.method == 'POST':
@@ -39,14 +57,20 @@ def submitty():
         pw = request.form['inputPW']
         if user == 'admin' and pw == 'pw':
             login_msg = 'Login successful!'
+            return render_template('dispatch_login_success.html', login_msg = login_msg)
         else:
-            login_msg = 'Login failure'
-        return render_template('dispatch_login_results.html', login_msg = login_msg)
+            login_msg = 'Login failure - redirecting back...'
+        return render_template('dispatch_login_failure.html', login_msg = login_msg)
     return render_template('dispatch_login_results.html', login_msg = login_msg)
-        
+
+# This accepts a request by the user and decides if it's usable (i.e., it's
+# within the correct boundaries, the student ID number is in the valid
+# format, the student ID is unique and not already in our active database).
+# Then it routes them to the map display page with the appropriate message.
 @app.route('/rider',methods = ['POST', 'GET'])
 def rider():
-    msg = "eh"
+    thing = "Invalid request"
+    msg = "Request already submitted"
     if request.method == 'POST':
         try:
             nm = request.form['inputName']
@@ -59,21 +83,17 @@ def rider():
             cmts = request.form['inputComment']
 
             bad = False
-            thing = ''
-            #failure_1 = ''
-            #failure_2 = ''
             my_map = ''
 
             if (Is_In_Bounds(tddr)==False) or (Is_In_Bounds(fddr) == False):
-                #failure_1 = "INPUT ERROR: One or both of the addresses you entered is outside Safe Ride's Boundaries"
                 bad = True
 
             if (Id_is_Valid(uoid)) == False:
-                #failure_2 = "INPUT ERROR: The UO ID you entered is not valid"
                 bad = True
 
             if bad:
-                thing = "UH-OH, you dun entered the information wrong, asshole"
+                thing = "Invalid request"
+                msg =  "Please check the addresses or student ID submitted"
 
             else:
                 pickup = Address_to_Long_Lat(fddr)
@@ -82,22 +102,25 @@ def rider():
                 my_map = make_map(pickup[0], pickup[1], dropoff[0], dropoff[1])
                 
 
-            with sql.connect("database.db") as con:
-                cur = con.cursor()
+                with sql.connect("database.db") as con:
+                    cur = con.cursor()
 
-                cur.execute("INSERT INTO requests (name,time,phone,uo_id,to_addr,from_addr,riders,active,comments) VALUES (?,?,?,?,?,?,?,'Yes',?)",(nm,tm,phn,uoid,tddr,fddr,rdrs,cmts) )
-            
-                con.commit()
-                msg = "Record successfully added"
+                    cur.execute("INSERT INTO requests (name,time,phone,uo_id,to_addr,from_addr,riders,active,comments) VALUES (?,?,?,?,?,?,?,'Yes',?)",(nm,tm,phn,uoid,tddr,fddr,rdrs,cmts) )
+                
+                    con.commit()
+                thing = "Request submitted"
+                msg = "If we are unable to fulfill your request, a dispatcher will call you at the number submitted"
         except:
                 oon.rollback()
-                msg = "Error in submitting request - are one of the fields empty?"
+                msg = "Error in submitting request"
 
         finally:
                 return render_template("map.html",msg = msg,thing=thing, my_map=my_map)
                 con.close()
 
-
+# This controls some of the functionality of the dispatcher page. It returns
+# each entry row-by-row from the database, determines if an entry is to be
+# set to "inactive", and if the database is to be cleared.
 @app.route('/dispatch_display', methods=['POST', 'GET'])
 def dispatch():
     con = sql.connect("database.db")
@@ -107,45 +130,51 @@ def dispatch():
     cur.execute("select * from requests where active == 'Yes' order by time ")
 
     rows = cur.fetchall()
-
-    con = sql.connect("master.db")
-    con.row_factory = sql.Row
-    cur = con.cursor()
-    cur.execute("select * from mdb")
-    rows2 = cur.fetchall()
     
     bad_app = request.form.get('bad_input', default=False, type=bool)
-    thing = "Initial thing"
+    thing = ""
     
     if request.method == 'POST':
-        name_app = request.form['name_input']
-        id_app = request.form['id_input']
-        
-        con = sql.connect("database.db")
-        cur = con.cursor()
+        if request.form['submit'] == "Clear Database":
+            con = sql.connect("database.db")
+            cur = con.cursor()
 
-        cur.execute("update requests set active = 'No' where uo_id = ?", [id_app])
-        con.commit()
-        con.close
-        
-        if bad_app == True:
-            try:
-                con = sql.connect("master.db")
-                cur = con.cursor()
-                            
-                cur.execute("INSERT INTO mdb (uoid) VALUES (?)", [id_app] )
-                            
-                con.commit()
+            cur.execute("DELETE FROM requests")
+            con.commit()
+            con.close()
 
-            except:
-                oon.rollback()
-                thing = "Something went wrong"
+            return render_template("dispatch_results.html",rows = rows, thing=thing)
+
+        else:
             
-            finally:
-                return render_template("dispatch_results.html",rows = rows,name_app = name_app, thing=thing, rows2=rows2)
+            name_app = request.form['name_input']
+            id_app = request.form['id_input']
+            
+            con = sql.connect("database.db")
+            cur = con.cursor()
 
-        return render_template("dispatch_results.html",rows = rows,name_app = name_app, thing=thing, rows2=rows2)
-    return render_template("dispatch_display.html",rows = rows, rows2=rows2,thing = thing)
+            cur.execute("update requests set active = 'No' where uo_id = ?", [id_app])
+            con.commit()
+            con.close
+            
+            if bad_app == True:
+                try:
+                    con = sql.connect("master.db")
+                    cur = con.cursor()
+                                
+                    cur.execute("INSERT INTO mdb (uoid) VALUES (?)", [id_app] )
+                                
+                    con.commit()
+
+                except:
+                    oon.rollback()
+                    thing = "Error in adding to bad database"
+                
+                finally:
+                    return render_template("dispatch_results.html",rows = rows,name_app = name_app, thing=thing)
+
+            return render_template("dispatch_results.html",rows = rows,name_app = name_app, thing=thing)
+    return render_template("dispatch_display.html",rows = rows, thing = thing)
 
 if __name__ == '__main__':
     app.run(debug = True)
