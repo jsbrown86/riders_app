@@ -1,45 +1,65 @@
+<!-- 
+
+	Project 1 CIS 422 Spring 2016
+	SafeRide App
+	Front-end design by Zhibin Zhang
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>SafeRide | Admin login</title>
  
+<head>
+    <title>SafeRide | Admin Login</title>
     <link href="../static/template.css" rel="stylesheet">
-    <link href="../static/reserve.css" rel="stylesheet">
-    
-  </head>
+
+    <link href="../static/index.css" rel="stylesheet">
  
-  <body>
+ </head>
+ 
+
+<body>
  
     <div class="container">
-      <div class="header">
+        <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation"><a href="toHome">Go Back</a>
+				    <li role="presentation"><a href="/">Home</a>
                     </li>
+					<li role="presentation"><a href="showReserve">Reserve</a>
+                    </li>
+					<li role="presentation" class="active"><a href="">Admin</a>
+					</li>
                 </ul>
             </nav>
             <h2 class="text-muted">SafeRide</h2>
         </div>
  
-      <div class="jumbotron">
-        <h2>Admin Log in</h2>
+        <div class="jumbotron">
+            <h2>Admin Login</h2>
         
-        <form action = {{url_for('submitty')}} method="POST">
-          <label for="inputUser" class="sr-only">ID</label>
-          <input type="text" name="inputUser" id="inputUser" class="form-control" placeholder="Username" required autofocus>
-          <label for="inputPW" class="sr-only">PW</label>
-          <input type="text" name="inputPW" id="inputPW" class="form-control" placeholder="Password" required>
-        
-        <!--
-        <p><a class="btn gtn-lg btn-primary" href="adminLog" role="button">Submit</a></p>
-      -->
-      <p><input type="submit" value="submit"/><p>
-      </form>
-      </div>
-
-      <footer class="footer">
-        <p>Contact Us: 541-346-7433</p>
-      </footer>
+			<form action = {{url_for('submitty')}} method="POST">
+			<table width=60% align="center">
+			<tr>
+			<td>
+			  <label for="inputUser" class="sr-only">ID</label>
+			  <input type="text" name="inputUser" id="inputUser" class="form-control" placeholder="Username" required autofocus>
+			  <label for="inputPW" class="sr-only">PW</label>
+			  <input type="password" name="inputPW" id="inputPW" class="form-control" placeholder="Password" required>
+			
+			  <p><p><input type="submit" value="Submit"><p>
+			
+			</form>
+			</td>
+			</tr>
+			</table>
+        </div>
+ 
+        <footer class="footer">
+            <p>Contact Us: 541-346-7433</p>
+        </footer>
+ 
     </div>
 </body>
+ 
 </html>

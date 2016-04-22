@@ -1,3 +1,11 @@
+<!-- 
+
+	Project 1 CIS 422 Spring 2016
+	SafeRide App
+	Front-end design by Zhibin Zhang
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,51 +21,48 @@
       <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation"><a href="toHome">Home</a>
+   				    <li role="presentation"><a href="/">Home</a>
                     </li>
-                    <li role="presentation" class="active"><a href="#">Reserve</a>
+					<li role="presentation" class="active"><a href="">Reserve</a>
                     </li>
-                    <li role="presentation"><a href="showCancel">Cancel a ride</a>
-                    </li>
+					<li role="presentation"><a href="showLogin">Admin</a>
+					</li>
                 </ul>
             </nav>
             <h2 class="text-muted">SafeRide</h2>
         </div>
  
       <div class="jumbotron">
-        <h2>Reserve a Ride for Today</h2>
+        <h2>Reserve a Ride for Today</h2><br>
         <form action={{url_for('rider')}} method="POST">
-        <table width=70% align=center><tr><td>
+        <table width=60% align=center><tr><td>
+		  <label for="inputName" class="sr-only">Name</label>
+          <input type="text" name="inputName" id="inputName" class="form-control" placeholder="Student Name" required autofocus>
           <label for="inputID" class="sr-only">ID</label>
-          <input type="text" name="inputID" id="inputID" class="form-control" placeholder="Student ID" required autofocus>
-          <label for="inputName" class="sr-only">Name</label>
-          <input type="text" name="inputName" id="inputName" class="form-control" placeholder="Student Name" required>
+          <input type="text" name="inputID" id="inputID" class="form-control" placeholder="Student ID" required>
           <label for="inputPhone" class="sr-only">PhoneNo</label>
           <input type="text" name="inputPhone" id="inputPhone" class="form-control" placeholder="Phone number" required>
           <label for="inputTime" class="sr-only">Time</label>
-          <input type="text" name="inputTime" id="inputTime" class="form-control" placeholder="Pick up time (e.g. 14:30)" required>
+          <input type="text" name="inputTime" id="inputTime" class="form-control" placeholder="Pick up time (e.g. 8:30 pm)" required>
           <label for="inputFrom" class="sr-only">CurrentAddr</label>
           <input type="text" name="inputFrom" id="inputFrom" class="form-control" placeholder="Where do we pick you up?" required>
           <label for="inputTo" class="sr-only">DestAddr</label>
           <input type="text" name="inputTo" id="inputTo" class="form-control" placeholder="Where do you want to go?" required>
         
-          Group Size: <select name="inputRiders">
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-          </select>
-        
-  
+          
         
           <label for="inputComment" class="sr-only">Comment</label>
           <input type="text" name="inputComment" id="inputComment" class="form-control" placeholder="Other comments ...">
         
-        
-        <!--
-        <p><a class="btn gtn-lg btn-primary" href="rider" role="button">Reserve</a></p>
-        -->
-        
-        <p><input type="submit" value="submit" />
+		<p><p>
+        Group Size: <select name="inputRiders">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          </select>
+		  
+        &nbsp; &nbsp; &nbsp;
+        <input type="submit" value="Submit" />
         </form>
       </td></tr></table>
 
@@ -70,10 +75,3 @@
     </div>
 </body>
 </html>
-<script src="content/js/jquery.min.js"></script>
-<script src="content/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.dropdown-toggle').dropdown();
-    });
-</script>

@@ -3,7 +3,6 @@
 	Project 1 CIS 422 Spring 2016
 	SafeRide App
 	Front-end design by Zhibin Zhang
-	Map configurations by Conor Tracey
 
 -->
 
@@ -11,8 +10,8 @@
 <html lang="en">
  
 <head>
-    <title>SafeRide | Reserve a ride</title>
-	{{my_map.js}}
+    <title>SafeRide | Admin Login</title>
+	<meta http-equiv="refresh" content="5;url=dispatch_display" />
     <link href="../static/template.css" rel="stylesheet">
 
     <link href="../static/index.css" rel="stylesheet">
@@ -28,21 +27,17 @@
                 <ul class="nav nav-pills pull-right">
 				    <li role="presentation"><a href="/">Home</a>
                     </li>
-					<li role="presentation" class="active"><a href="#">Reserve</a>
+					<li role="presentation"><a href="showReserve">Reserve</a>
                     </li>
-					<li role="presentation"><a href="showLogin">Admin</a>
+					<li role="presentation" class="active"><a href="">Admin</a>
 					</li>
                 </ul>
             </nav>
             <h2 class="text-muted">SafeRide</h2>
         </div>
-		
-        <div class="jumbotron" >
-           <center><h2>{{ thing }}</h2></center>
-		   <center><h3>{{ msg }}</h3></center>
-            <p class="lead"></p>
-            <p><center>{{ my_map.html }}</center>
-            </p>
+ 
+        <div class="jumbotron">
+            <h2>{{login_msg}}</h2><p>
         </div>
  
         <footer class="footer">
