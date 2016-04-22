@@ -1,0 +1,6 @@
+Flask==0.10.1
+geopy == 1.11.0
+flask-googlemaps
+gunicorn==19.4.5
+Jinja2==2.8
+Werkzeug==0.11.5
