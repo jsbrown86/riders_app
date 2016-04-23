@@ -1,1 +1,1 @@
-# Complete prototype SafeRide App can be found at http://github.com/jsbrown86/riders_app/SafeRide---Final-version
+# Complete prototype SafeRide App can be found at https://github.com/jsbrown86/riders_app/tree/master/SafeRide---Final-version
