@@ -16,6 +16,7 @@ Files/folders of note:
    "input_val.py" checks whether the addresses entered are valid and if the student ID is in the correct format
    "map_util.py" is used to integrate Google Maps with flask
    "templates" contains each of the web-pages to be displayed by dispatch_display.py.
+   "Makefile" - use command "make install" to create the virtual environment and command "make run" to launch the application
 
 Front-end design by Zhibin Zhang
 Map configuration by Conor Tracey
