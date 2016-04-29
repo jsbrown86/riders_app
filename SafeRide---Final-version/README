@@ -2,7 +2,7 @@ SafeRide App by the Riders (Zhibin Zhang, Conor Tracey, Jacob Brown)
 for CIS 422 Spring 2016
 Project 1
 
-Our Project can be visited at http://ix.cs.uoregon.edu:5601.
+Our Project can be visited at http://ix.cs.uoregon.edu:5601 --- No longer avaliable.
 
 This project uses HTML, CSS, Bootstrap, Python/Flask, Google Maps, and SQLite to allow users to submit a request online to a
 simple database which can then be accessed by dispatchers. Dispatchers are able to copy a code from these requests into a Google
